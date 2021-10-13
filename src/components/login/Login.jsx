@@ -2,7 +2,16 @@ import React from "react";
 import "./style.css";
 
 const Login = (props) => {
-    const { onChange, switchLogin, onSubmit, LoginError, LoginForm } = props;
+    const {
+        onChange,
+        switchLogin,
+        onSubmit,
+        LoginError,
+        LoginForm,
+        onToggle,
+        Continue,
+        onPressContinue,
+    } = props;
     return (
         <div className="LoginWrapperContainer">
             <form className="InputWrapper">
@@ -15,11 +24,19 @@ const Login = (props) => {
                     placeholder="johndoe@domain.com"
                     className="Input"
                     onChange={onChange}
+                    style={{
+                        border:
+                            LoginError.isEmailError === true
+                                ? "2px solid red"
+                                : LoginError.isEmailError === false
+                                ? "2px solid green"
+                                : "",
+                    }}
                 />
                 {LoginError.email && (
                     <div className="Error">{LoginError.email}</div>
                 )}
-                {!switchLogin && (
+                {Continue && !switchLogin && (
                     <>
                         <div className="InputLabel">Password</div>
                         <input
@@ -32,9 +49,9 @@ const Login = (props) => {
                         />
                     </>
                 )}
-                {switchLogin && LoginForm.otpAvailable && (
+                {Continue && switchLogin && LoginForm.otpAvailable && (
                     <>
-                        <div className="InputLabel">Otp</div>
+                        <div className="InputLabel">one-time passcode</div>
                         <input
                             id="otp"
                             name="otp"
@@ -43,18 +60,37 @@ const Login = (props) => {
                         />
                     </>
                 )}
+                {!Continue && (
+                    <button className="RequestOtp" onClick={onPressContinue}>
+                        <div>Continue</div>
+                    </button>
+                )}
 
-                <button className="RequestOtp" onClick={onSubmit}>
-                    {!switchLogin ? (
-                        <div>Login</div>
-                    ) : LoginForm.otpAvailable ? (
-                        <div>Login</div>
-                    ) : (
-                        <div>Request Otp</div>
-                    )}
-                </button>
+                {Continue && (
+                    <button className="RequestOtp" onClick={onSubmit}>
+                        {!switchLogin ? (
+                            <div>Login</div>
+                        ) : LoginForm.otpAvailable ? (
+                            <div>Sign in</div>
+                        ) : (
+                            <div>Request one-time passcode</div>
+                        )}
+                    </button>
+                )}
             </form>
             <div className="Error">{LoginError.databaseError}</div>
+            {Continue && (
+                <div className="SwitchContainer">
+                    <div className="Switch">OR</div>
+                    <button className="SwitchBtn" onClick={onToggle}>
+                        {!switchLogin ? (
+                            <div>Sign in with a one-time passcode</div>
+                        ) : (
+                            <div>Sign in with a password</div>
+                        )}
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

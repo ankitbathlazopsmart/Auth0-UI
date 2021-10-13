@@ -13,9 +13,12 @@ export default function LoginContainer(props) {
     });
     const [LoginError, setLoginError] = useState({
         email: "",
+        isEmailError: "",
         databaseError: "",
     });
     const [switchLogin, setToggle] = useState(false);
+
+    const [Continue, setContinue] = useState(false);
 
     const onToggle = () => {
         setToggle(!switchLogin);
@@ -24,14 +27,9 @@ export default function LoginContainer(props) {
             email: "",
             databaseError: "",
         });
-        setLoginForm({
-            ...LoginForm,
-            email: "",
-            password: "",
-            otp: "",
-            otpAvailable: false,
-            isSubmitting: false,
-        });
+    };
+    const onPressContinue = () => {
+        setContinue(true);
     };
 
     const validateEmail = (email) => {
@@ -46,16 +44,19 @@ export default function LoginContainer(props) {
                 if (!e.target.value) {
                     setLoginError({
                         ...LoginError,
+                        isEmailError: true,
                         [e.target.name]: "Email is required",
                     });
                 } else if (e.target.value && !validateEmail(e.target.value)) {
                     setLoginError({
                         ...LoginError,
+                        isEmailError: true,
                         [e.target.name]: "Email is not valid",
                     });
                 } else {
                     setLoginError({
                         ...LoginError,
+                        isEmailError: false,
                         [e.target.name]: "",
                     });
                 }
@@ -125,5 +126,7 @@ export default function LoginContainer(props) {
         onSubmit,
         LoginForm,
         LoginError,
+        Continue,
+        onPressContinue,
     });
 }
