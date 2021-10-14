@@ -11,7 +11,9 @@ const Login = (props) => {
         onToggle,
         Continue,
         onPressContinue,
+        validateEmail,
     } = props;
+
     return (
         <div className="LoginWrapperContainer">
             <form className="InputWrapper">
@@ -61,7 +63,16 @@ const Login = (props) => {
                     </>
                 )}
                 {!Continue && (
-                    <button className="RequestOtp" onClick={onPressContinue}>
+                    <button
+                        className="RequestOtp"
+                        onClick={onPressContinue}
+                        disabled={!validateEmail(LoginForm.email)}
+                        style={{
+                            backgroundColor: !validateEmail(LoginForm.email)
+                                ? "grey"
+                                : "",
+                        }}
+                    >
                         <div>Continue</div>
                     </button>
                 )}
@@ -69,7 +80,7 @@ const Login = (props) => {
                 {Continue && (
                     <button className="RequestOtp" onClick={onSubmit}>
                         {!switchLogin ? (
-                            <div>Login</div>
+                            <div>Sign in</div>
                         ) : LoginForm.otpAvailable ? (
                             <div>Sign in</div>
                         ) : (
@@ -86,7 +97,7 @@ const Login = (props) => {
                         {!switchLogin ? (
                             <div>Sign in with a one-time passcode</div>
                         ) : (
-                            <div>Sign in with a password</div>
+                            <div>Sign in with password</div>
                         )}
                     </button>
                 </div>

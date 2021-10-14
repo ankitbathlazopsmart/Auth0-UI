@@ -128,5 +128,6 @@ export default function LoginContainer(props) {
         LoginError,
         Continue,
         onPressContinue,
+        validateEmail,
     });
 }

@@ -11,6 +11,7 @@ const LoginUI = (props) => {
         LoginForm,
         Continue,
         onPressContinue,
+        validateEmail,
     } = props;
 
     return (
@@ -20,9 +21,16 @@ const LoginUI = (props) => {
                     <div className="WelcomeContainer">
                         <div className="Logo">McAfee</div>
                         <div className="Intro">Welcome back to McAfee !</div>
-                        <div className="IntroSubHeading">
-                            Choose your sign in method to continue.
-                        </div>
+                        {Continue ? (
+                            <div className="IntroSubHeading">
+                                Choose your sign in method to continue.
+                            </div>
+                        ) : (
+                            <div className="IntroSubHeading">
+                                Enter your email address so we can find your
+                                account.
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="RightWrapper">
@@ -35,6 +43,7 @@ const LoginUI = (props) => {
                         onToggle={onToggle}
                         onPressContinue={onPressContinue}
                         Continue={Continue}
+                        validateEmail={validateEmail}
                     />
                 </div>
             </div>
