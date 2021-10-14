@@ -10,7 +10,7 @@ const Main = () => {
         <BrowserRouter>
             <AccountProvider>
                 <Switch>
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/" component={Login} />
                     <Route exact path="/authorize" component={Authorize} />
                     <Route exact path="/dashboard" component={DashBoard} />
                 </Switch>
