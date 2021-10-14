@@ -12,6 +12,7 @@ const LoginUI = (props) => {
         Continue,
         onPressContinue,
         validateEmail,
+        getOtp,
     } = props;
 
     return (
@@ -44,6 +45,7 @@ const LoginUI = (props) => {
                         onPressContinue={onPressContinue}
                         Continue={Continue}
                         validateEmail={validateEmail}
+                        getOtp={getOtp}
                     />
                 </div>
             </div>

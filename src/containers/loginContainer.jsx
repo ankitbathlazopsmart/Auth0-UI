@@ -100,13 +100,6 @@ export default function LoginContainer(props) {
                     console.log(LoginForm.otp, "otp");
                     const res = await otpLogin(LoginForm.email, LoginForm.otp);
                     console.log(res, "ankit");
-                } else {
-                    const res = await otpStart(LoginForm.email);
-                    console.log("enter here", res);
-                    setLoginForm({
-                        ...LoginForm,
-                        otpAvailable: true,
-                    });
                 }
             } catch (err) {
                 console.log(err);
@@ -118,6 +111,23 @@ export default function LoginContainer(props) {
         }
     };
 
+    const getOtp = async () => {
+        try {
+            setToggle(!switchLogin);
+            const res = await otpStart(LoginForm.email);
+            console.log("enter here", res);
+            setLoginForm({
+                ...LoginForm,
+                otpAvailable: true,
+            });
+        } catch (err) {
+            console.log(err);
+            setLoginError({
+                ...LoginError,
+                databaseError: err.description,
+            });
+        }
+    };
     const child = React.Children.only(props.children);
     return React.cloneElement(child, {
         onChange,
@@ -129,5 +139,6 @@ export default function LoginContainer(props) {
         Continue,
         onPressContinue,
         validateEmail,
+        getOtp,
     });
 }

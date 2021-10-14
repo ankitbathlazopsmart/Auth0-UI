@@ -12,29 +12,34 @@ const Login = (props) => {
         Continue,
         onPressContinue,
         validateEmail,
+        getOtp,
     } = props;
 
     return (
         <div className="LoginWrapperContainer">
             <form className="InputWrapper">
-                <div className="InputLabel">Email Address</div>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={LoginForm.email}
-                    placeholder="johndoe@domain.com"
-                    className="Input"
-                    onChange={onChange}
-                    style={{
-                        border:
-                            LoginError.isEmailError === true
-                                ? "2px solid red"
-                                : LoginError.isEmailError === false
-                                ? "2px solid green"
-                                : "",
-                    }}
-                />
+                {!switchLogin && (
+                    <>
+                        <div className="InputLabel">Email Address</div>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={LoginForm.email}
+                            placeholder="johndoe@domain.com"
+                            className="Input"
+                            onChange={onChange}
+                            style={{
+                                border:
+                                    LoginError.isEmailError === true
+                                        ? "2px solid red"
+                                        : LoginError.isEmailError === false
+                                        ? "2px solid green"
+                                        : "",
+                            }}
+                        />
+                    </>
+                )}
                 {LoginError.email && (
                     <div className="Error">{LoginError.email}</div>
                 )}
@@ -79,13 +84,14 @@ const Login = (props) => {
 
                 {Continue && (
                     <button className="RequestOtp" onClick={onSubmit}>
-                        {!switchLogin ? (
+                        {/* {!switchLogin ? (
                             <div>Sign in</div>
                         ) : LoginForm.otpAvailable ? (
                             <div>Sign in</div>
                         ) : (
                             <div>Request one-time passcode</div>
-                        )}
+                        )} */}
+                        <div>Sign in</div>
                     </button>
                 )}
             </form>
@@ -93,13 +99,23 @@ const Login = (props) => {
             {Continue && (
                 <div className="SwitchContainer">
                     <div className="Switch">OR</div>
-                    <button className="SwitchBtn" onClick={onToggle}>
+                    {/* <button className="SwitchBtn" onClick={onToggle}>
                         {!switchLogin ? (
                             <div>Sign in with a one-time passcode</div>
                         ) : (
                             <div>Sign in with password</div>
                         )}
-                    </button>
+                    </button> */}
+                    {!switchLogin && (
+                        <button className="SwitchBtn" onClick={getOtp}>
+                            <div>Sign in with a one-time passcode</div>
+                        </button>
+                    )}
+                    {switchLogin && (
+                        <button className="SwitchBtn" onClick={onToggle}>
+                            <div>Sign in with password</div>
+                        </button>
+                    )}
                 </div>
             )}
         </div>
