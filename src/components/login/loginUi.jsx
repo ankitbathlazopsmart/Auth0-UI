@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import Login from "./Login";
+import translate from "../../localization/translate";
 const LoginUI = (props) => {
     const {
         onChange,
@@ -21,15 +22,20 @@ const LoginUI = (props) => {
                 <div className="LeftWrapper">
                     <div className="WelcomeContainer">
                         <div className="Logo">McAfee</div>
-                        <div className="Intro">Welcome back to McAfee !</div>
+                        <div className="Intro">
+                            {translate("Welcome_back_to")} McAfee !
+                        </div>
                         {Continue ? (
                             <div className="IntroSubHeading">
-                                Choose your sign in method to continue.
+                                {translate(
+                                    "choose_your_signIn_method_continue"
+                                )}
                             </div>
                         ) : (
                             <div className="IntroSubHeading">
-                                Enter your email address so we can find your
-                                account.
+                                {translate(
+                                    "Enter_your_email_address_so_we_can_find_your_account"
+                                )}
                             </div>
                         )}
                     </div>

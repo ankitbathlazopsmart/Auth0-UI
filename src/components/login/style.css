@@ -44,21 +44,36 @@
     display: flex;
     flex-direction: column;
 }
+.InputContainer {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
 .InputLabel {
     flex: 1;
-    padding: 1rem 1rem;
+    position: absolute;
+    top: -1rem;
+    background-color: #fff;
+    left: 10px;
+    padding: 5px 2px;
     font-weight: 600;
-    color: #333;
+    color: darkgray;
 }
 .Input {
-    padding: 1rem 1rem;
-    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
     flex: 1;
     border: 1px solid RGB(212, 213, 219);
     box-shadow: inset 0 2px 2px 0 rgb(0 0 0 / 5%);
     color: RGB(38, 41, 77);
     font-size: inherit;
     outline: none;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
 }
 .Error {
     color: red;
@@ -85,6 +100,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
     border-top: 1px dashed #333;
 }
 
@@ -116,5 +132,8 @@
     }
     .LeftWrapper {
         flex: 1;
+    }
+    .LoginWrapperContainer {
+        margin: 1rem 5rem;
     }
 }

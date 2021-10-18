@@ -15,6 +15,7 @@ export default function LoginContainer(props) {
         email: "",
         isEmailError: "",
         databaseError: "",
+        errorCode: "",
     });
     const [switchLogin, setToggle] = useState(false);
 
@@ -92,6 +93,7 @@ export default function LoginContainer(props) {
                 setLoginError({
                     ...LoginError,
                     databaseError: err.description,
+                    errorCode: err.code,
                 });
             }
         } else {
@@ -106,6 +108,7 @@ export default function LoginContainer(props) {
                 setLoginError({
                     ...LoginError,
                     databaseError: err.description,
+                    errorCode: err.code,
                 });
             }
         }
@@ -125,6 +128,7 @@ export default function LoginContainer(props) {
             setLoginError({
                 ...LoginError,
                 databaseError: err.description,
+                errorCode: err.code,
             });
         }
     };

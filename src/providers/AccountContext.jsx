@@ -19,6 +19,7 @@ const AccountProvider = (props) => {
         clientID: process.env.REACT_APP_CLIENT_ID,
         responseType: "token id_token",
         redirectUri: "http://localhost:3000/authorize",
+        audience: "https://dev-xl32ev2i.us.auth0.com/api/v2/",
     });
 
     const otpStart = (email) => {

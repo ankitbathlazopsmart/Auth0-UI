@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import translate from "../../localization/translate";
 
 const Login = (props) => {
     const {
@@ -15,29 +16,35 @@ const Login = (props) => {
         getOtp,
     } = props;
 
+    console.log(LoginError.errorCode);
     return (
         <div className="LoginWrapperContainer">
             <form className="InputWrapper">
                 {!switchLogin && (
                     <>
-                        <div className="InputLabel">Email Address</div>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={LoginForm.email}
-                            placeholder="johndoe@domain.com"
-                            className="Input"
-                            onChange={onChange}
-                            style={{
-                                border:
-                                    LoginError.isEmailError === true
-                                        ? "2px solid red"
-                                        : LoginError.isEmailError === false
-                                        ? "2px solid green"
-                                        : "",
-                            }}
-                        />
+                        <div className="InputContainer">
+                            <div className="InputLabel">
+                                {translate("emailAddress")}
+                            </div>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={LoginForm.email}
+                                placeholder="johndoe@domain.com"
+                                className="Input"
+                                onChange={onChange}
+                                style={{
+                                    border:
+                                        LoginError.isEmailError === true
+                                            ? "2px solid red"
+                                            : LoginError.isEmailError === false
+                                            ? "2px solid green"
+                                            : "",
+                                    backgroundColor: "#ffff",
+                                }}
+                            />
+                        </div>
                     </>
                 )}
                 {LoginError.email && (
@@ -45,26 +52,34 @@ const Login = (props) => {
                 )}
                 {Continue && !switchLogin && (
                     <>
-                        <div className="InputLabel">Password</div>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="********"
-                            className="Input"
-                            onChange={onChange}
-                        />
+                        <div className="InputContainer">
+                            <div className="InputLabel">
+                                {translate("password")}
+                            </div>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="********"
+                                className="Input"
+                                onChange={onChange}
+                            />
+                        </div>
                     </>
                 )}
                 {Continue && switchLogin && LoginForm.otpAvailable && (
                     <>
-                        <div className="InputLabel">one-time passcode</div>
-                        <input
-                            id="otp"
-                            name="otp"
-                            className="Input"
-                            onChange={onChange}
-                        />
+                        <div className="InputContainer">
+                            <div className="InputLabel">
+                                {translate("one_time_passcode")}
+                            </div>
+                            <input
+                                id="otp"
+                                name="otp"
+                                className="Input"
+                                onChange={onChange}
+                            />
+                        </div>
                     </>
                 )}
                 {!Continue && (
@@ -78,7 +93,7 @@ const Login = (props) => {
                                 : "",
                         }}
                     >
-                        <div>Continue</div>
+                        <div>{translate("continue")}</div>
                     </button>
                 )}
 
@@ -91,14 +106,16 @@ const Login = (props) => {
                         ) : (
                             <div>Request one-time passcode</div>
                         )} */}
-                        <div>Sign in</div>
+                        <div>{translate("signIn")}</div>
                     </button>
                 )}
             </form>
-            <div className="Error">{LoginError.databaseError}</div>
+            {LoginError.errorCode && (
+                <div className="Error">{translate(LoginError.errorCode)}</div>
+            )}
             {Continue && (
                 <div className="SwitchContainer">
-                    <div className="Switch">OR</div>
+                    <div className="Switch">{translate("or")}</div>
                     {/* <button className="SwitchBtn" onClick={onToggle}>
                         {!switchLogin ? (
                             <div>Sign in with a one-time passcode</div>
@@ -108,12 +125,14 @@ const Login = (props) => {
                     </button> */}
                     {!switchLogin && (
                         <button className="SwitchBtn" onClick={getOtp}>
-                            <div>Sign in with a one-time passcode</div>
+                            <div>
+                                {translate("Sign_in_with_a_onetime_passcode")}
+                            </div>
                         </button>
                     )}
                     {switchLogin && (
                         <button className="SwitchBtn" onClick={onToggle}>
-                            <div>Sign in with password</div>
+                            <div>{translate("signIn_with_password")}</div>
                         </button>
                     )}
                 </div>
