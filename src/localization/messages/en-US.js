@@ -18,6 +18,7 @@ const en = {
         access_denied: "Wrong email or password.",
         too_many_attempts:
             "Your account has been blocked after multiple consecutive login attempts.",
+        Welcome_to_dashboard: "Welcome to Dashboard",
     },
 };
 export default en;

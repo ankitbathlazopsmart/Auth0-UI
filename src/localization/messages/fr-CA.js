@@ -18,6 +18,7 @@ const fr = {
         access_denied: "Mauvaise adresse de messagerie ou mot de passe.",
         too_many_attempts:
             "Votre compte a Ã©tÃ© bloquÃ© Ã  la suite de trop nombreuses tentatives de connexion consÃ©cutives.",
+        Welcome_to_dashboard: "bienvenue au tableau de bord",
     },
 };
 export default fr;

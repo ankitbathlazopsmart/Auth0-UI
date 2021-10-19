@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Login from "./login/index";
 import { Switch, Route, useLocation } from "react-router-dom";
 import DashBoard from "./dashboard/index";
@@ -12,19 +12,30 @@ function useQuery() {
 }
 const Main = () => {
     let query = useQuery();
+    let locale = useRef("");
+    let lang;
+    let culture = query.get("culture");
 
-    const lang = query.get("culture") ?? navigator.language;
-    let locale;
-    if (lang === "en-us") {
-        locale = LOCALES.ENGLISH;
-    } else if (lang === "fr-ca") {
-        locale = LOCALES.FRENCH;
+    if (culture === null) {
+        if (localStorage.getItem("lang") === null) {
+            lang = "en-us";
+        } else {
+            lang = localStorage.getItem("lang");
+        }
     } else {
-        locale = "en-us";
+        lang = culture;
+        localStorage.setItem("lang", lang);
     }
 
+    if (lang === "en-us") {
+        locale.current = LOCALES.ENGLISH;
+    } else if (lang === "fr-ca") {
+        locale.current = LOCALES.FRENCH;
+    } else {
+        locale.current = "en-us";
+    }
     return (
-        <LanguageProvider locale={locale}>
+        <LanguageProvider locale={locale.current}>
             <AccountProvider>
                 <Switch>
                     <Route exact path="/" component={Login} />

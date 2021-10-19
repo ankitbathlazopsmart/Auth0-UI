@@ -16,7 +16,6 @@ const Login = (props) => {
         getOtp,
     } = props;
 
-    console.log(LoginError.errorCode);
     return (
         <div className="LoginWrapperContainer">
             <form className="InputWrapper">

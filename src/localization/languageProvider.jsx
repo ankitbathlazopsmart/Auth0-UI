@@ -9,7 +9,6 @@ const LanguageProvider = ({ children, locale }) => (
         locale={locale}
         messages={messages[locale]}
     >
-        {console.log(locale)}
         {children}
     </IntlProvider>
 );

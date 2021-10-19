@@ -1,13 +1,15 @@
 import React from "react";
 import "./style.css";
-
+import translate from "../../localization/translate";
 const DashboardUI = () => {
     const user = JSON.parse(localStorage.getItem("userData"));
 
     return (
         <>
             <div className="DashboardContainer">
-                <div className="DashBoardHeading">Welcome to DashBoard... </div>
+                <div className="DashBoardHeading">
+                    {translate("Welcome_to_dashboard")}{" "}
+                </div>
                 <div
                     className="UserImg"
                     style={{ backgroundImage: `url(${user?.picture})` }}
