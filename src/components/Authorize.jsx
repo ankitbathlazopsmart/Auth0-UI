@@ -18,7 +18,7 @@ const Authorize = () => {
 
                 const { email, name, picture, sub: id } = res.idTokenPayload;
                 storeUserData({ email, name, picture, id });
-                AuthenticateUser(res.idToken);
+                AuthenticateUser(res.idToken, res.accessToken);
             });
         }
     };

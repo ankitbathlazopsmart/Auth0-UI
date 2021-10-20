@@ -1,4 +1,5 @@
 import { LOCALES } from "../constants";
+
 const fr = {
     [LOCALES.FRENCH]: {
         Welcome_back_to: "Bon retour à",
@@ -17,8 +18,15 @@ const fr = {
         continue: "Continuez",
         access_denied: "Mauvaise adresse de messagerie ou mot de passe.",
         too_many_attempts:
-            "Votre compte a Ã©tÃ© bloquÃ© Ã  la suite de trop nombreuses tentatives de connexion consÃ©cutives.",
+            "Votre compte a été bloqué après plusieurs tentatives de connexion consécutives. Nous vous avons envoyé un e-mail avec des instructions sur la façon de le débloquer",
         Welcome_to_dashboard: "bienvenue au tableau de bord",
+        invalid_request:
+            "Corps de requête non valide. Tous et uniquement client_id, type d'identification, nom d'utilisateur, otp, domaine sont requis",
+        unauthorized_client: "Connexion d'origine croisée non autorisée.",
+        unsupported_credential_typ: "Paramètre de type d'identifiant inconnu.",
+        blocked_user: "utilisateur bloqué",
+        password_leaked:
+            "Cette tentative de connexion a été bloquée car le mot de passe que vous utilisez a déjà été divulgué suite à une violation de données",
     },
 };
 export default fr;

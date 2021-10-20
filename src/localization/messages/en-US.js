@@ -17,8 +17,15 @@ const en = {
         continue: "continue",
         access_denied: "Wrong email or password.",
         too_many_attempts:
-            "Your account has been blocked after multiple consecutive login attempts.",
+            " Your account has been blocked after multiple consecutive login attempts. We’ve sent you an email with instructions on how to unblock it.",
         Welcome_to_dashboard: "Welcome to Dashboard",
+        invalid_request:
+            " Invalid request body. All and only of client_id, credential_type, username, otp, realm are required.",
+        unauthorized_client: "Cross origin login not allowed.",
+        unsupported_credential_type: " Unknown credential type parameter.",
+        blocked_user: "blocked user",
+        password_leaked:
+            "This login attempt has been blocked because the password you're using was previously disclosed through a data breach ",
     },
 };
 export default en;

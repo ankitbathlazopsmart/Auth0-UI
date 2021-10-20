@@ -6,6 +6,7 @@ import { AccountProvider } from "../providers/AccountContext";
 import Authorize from "./Authorize";
 import LanguageProvider from "../localization/languageProvider";
 import { LOCALES } from "../localization/constants";
+import { CommonDataProvider } from "../providers/CommonDataContext";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -35,15 +36,17 @@ const Main = () => {
         locale.current = "en-us";
     }
     return (
-        <LanguageProvider locale={locale.current}>
-            <AccountProvider>
-                <Switch>
-                    <Route exact path="/" component={Login} />
-                    <Route exact path="/authorize" component={Authorize} />
-                    <Route exact path="/dashboard" component={DashBoard} />
-                </Switch>
-            </AccountProvider>
-        </LanguageProvider>
+        <CommonDataProvider>
+            <LanguageProvider locale={locale.current}>
+                <AccountProvider>
+                    <Switch>
+                        <Route exact path="/" component={Login} />
+                        <Route exact path="/authorize" component={Authorize} />
+                        <Route exact path="/dashboard" component={DashBoard} />
+                    </Switch>
+                </AccountProvider>
+            </LanguageProvider>
+        </CommonDataProvider>
     );
 };
 export default Main;

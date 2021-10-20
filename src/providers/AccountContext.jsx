@@ -6,8 +6,9 @@ const AccountContext = React.createContext({});
 const AccountProvider = (props) => {
     const [isAuthenticated, setIsAuth] = useState(false);
 
-    const AuthenticateUser = (authToken) => {
-        localStorage.setItem("auth_token", authToken);
+    const AuthenticateUser = (idToken, accessToken) => {
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("id_token", idToken);
         setIsAuth(true);
     };
 
@@ -22,17 +23,42 @@ const AccountProvider = (props) => {
         audience: "https://dev-xl32ev2i.us.auth0.com/api/v2/",
     });
 
-    const otpStart = (email) => {
+    const getUserInfo = () => {
+        const access_token = localStorage.getItem("access_token");
         return new Promise((resolve, reject) => {
-            const variables = { email, connection: "email", send: "code" };
-            webAuth.passwordlessStart(variables, (err, res) => {
+            webAuth.client.userInfo(access_token, (res, err) => {
                 if (err) {
                     console.log(err);
                     reject(err);
                 } else {
+                    console.log(res);
                     resolve(res);
                 }
             });
+        });
+    };
+
+    const otpStart = (email) => {
+        return new Promise((resolve, reject) => {
+            // const variables = { email, connection: "email", send: "code" };
+            webAuth.passwordlessStart(
+                {
+                    email,
+                    connection: "email",
+                    send: "code",
+                    authParams: {
+                        lang: "fr-ca",
+                    },
+                },
+                (err, res) => {
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    } else {
+                        resolve(res);
+                    }
+                }
+            );
         });
     };
 
@@ -84,6 +110,7 @@ const AccountProvider = (props) => {
                 AuthenticateUser,
                 storeUserData,
                 isAuthenticated,
+                getUserInfo,
             }}
         >
             {props.children}
