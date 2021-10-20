@@ -1,8 +1,8 @@
 import Main from "./components/main";
-function App() {
+function App({ pageConfig }) {
     return (
         <div className="App">
-            <Main />
+            <Main pageConfig={pageConfig} />
         </div>
     );
 }

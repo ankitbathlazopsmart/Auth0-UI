@@ -16,12 +16,24 @@ const AccountProvider = (props) => {
         localStorage.setItem("userData", JSON.stringify(data));
     };
     const webAuth = new auth0.WebAuth({
-        domain: process.env.REACT_APP_DOMAIN,
-        clientID: process.env.REACT_APP_CLIENT_ID,
-        responseType: "token id_token",
-        redirectUri: "http://localhost:3000/authorize",
-        audience: "https://dev-xl32ev2i.us.auth0.com/api/v2/",
+        domain: props.config.auth0Domain,
+        clientID: props.config.clientID,
+        redirectUri: props.config.callbackURL,
+        responseType: props.config.extraParams.response_type,
+        scope: props.config.extraParams.scope,
+        state: props.config.extraParams.state,
+        nonce: props.config.extraParams.nonce,
+        _csrf: props.config.extraParams._csrf,
+        audience: props.config.extraParams.audience,
+        overrides: { __tenant: props.config.auth0Tenant },
     });
+    // const webAuth = new auth0.WebAuth({
+    //     domain: process.env.REACT_APP_DOMAIN,
+    //     clientID: process.env.REACT_APP_CLIENT_ID,
+    //     responseType: "token id_token",
+    //     redirectUri: "http://localhost:3000/authorize",
+    //     audience: "https://dev-xl32ev2i.us.auth0.com/api/v2/",
+    // });
 
     const getUserInfo = () => {
         const access_token = localStorage.getItem("access_token");

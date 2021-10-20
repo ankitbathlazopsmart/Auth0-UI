@@ -11,7 +11,7 @@ import { CommonDataProvider } from "../providers/CommonDataContext";
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
-const Main = () => {
+const Main = ({ pageConfig }) => {
     let query = useQuery();
     let locale = useRef("");
     let lang;
@@ -38,7 +38,7 @@ const Main = () => {
     return (
         <CommonDataProvider>
             <LanguageProvider locale={locale.current}>
-                <AccountProvider>
+                <AccountProvider config={pageConfig}>
                     <Switch>
                         <Route exact path="/" component={Login} />
                         <Route exact path="/authorize" component={Authorize} />
